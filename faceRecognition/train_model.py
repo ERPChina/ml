@@ -102,8 +102,8 @@ if __name__ == '__main__':
     model = Model()
     model.read_trainData(dataset)
     model.build_model()
-    model.train_model()
-    #model.retrain_model()
+    #model.train_model()
+    model.retrain_model()
     model.evaluate_model()
     model.save()
 

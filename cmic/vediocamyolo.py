@@ -1,9 +1,15 @@
 import cv2
-import yolo as ml
+import yolov3opencv as ml
 
 #cap = cv2.VideoCapture(0)
 
-cap = cv2.VideoCapture('/Volumes/NETAC/中集/违规作业/6 7/ch06_20181009151255.mp4')
+cap = cv2.VideoCapture('/Users/i037762/Downloads/ch08_20181009152309.mp4')
+ret, image = cap.read() # 设置每一张图片的颜色
+cv2.imwrite('test.jpg', image)
+while(True):
+    ret, image = cap.read() # 设置每一张图片的颜色
+    cv2.imwrite('test.jpg', image)
+
 while(True): # 从摄像头中读取画面，while表示循环读取画面，也就是一张一张图片形成了一个视频
     ret, image = cap.read() # 设置每一张图片的颜色
     image=cv2.resize(image, (512,384), interpolation=cv2.INTER_LINEAR)

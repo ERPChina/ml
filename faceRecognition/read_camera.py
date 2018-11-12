@@ -15,7 +15,7 @@ class Camera_reader(object):
 
     def build_camera(self):
         #opencv文件中人脸级联文件的位置，用于帮助识别图像或者视频流中的人脸
-        face_cascade = cv2.CascadeClassifier('/Users/i037762/tf/lib/python3.6/site-packages/cv2/data/haarcascade_frontalface_alt.xml')
+        face_cascade = cv2.CascadeClassifier('/usr/local/lib/python3.6/site-packages/cv2/data/haarcascade_frontalface_alt.xml')
         #读取dataset数据集下的子文件夹名称
         name_list = read_name_list('./dataset/result')
 
@@ -26,12 +26,13 @@ class Camera_reader(object):
         while success and cv2.waitKey(1) == -1:
              success, frame = cameraCapture.read()
              gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY) #图像灰化
-             faces = face_cascade.detectMultiScale(gray, 1.3, 5) #识别人脸
+             faces = face_cascade.detectMultiScale(gray, 1.1) #识别人脸
              for (x, y, w, h) in faces:
                  ROI = gray[x:x + w, y:y + h]
-                 ROI = cv2.resize(ROI, (self.img_size, self.img_size), interpolation=cv2.INTER_LINEAR)
-                 label,prob = self.model.predict(ROI)  #利用模型对cv2识别出的人脸进行比对
-                 if prob >0.6:    #如果模型认为概率高于70%则显示为模型中已有的label
+                 if ROI.size>1:
+                     ROI = cv2.resize(ROI, (self.img_size, self.img_size), interpolation=cv2.INTER_LINEAR)
+                     label,prob = self.model.predict(ROI)  #利用模型对cv2识别出的人脸进行比对
+                 if prob >0.7:    #如果模型认为概率高于70%则显示为模型中已有的label
                      show_name = name_list[label]
                  else:
                      show_name = 'Stranger'

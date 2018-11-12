@@ -22,8 +22,8 @@ class YOLO(object):
         "model_path": 'model_data/trained_weights.h5',
         "anchors_path": 'model_data/yolo_anchors.txt',
         "classes_path": 'model_data/coco_classes.txt',
-        "score" : 0.4,
-        "iou" : 0.4,
+        "score" : 0.5,
+        "iou" : 0.8,
         "model_image_size" : (416, 416),
         "gpu_num" : 1,
     }
@@ -204,7 +204,7 @@ def detect_video(yolo, video_path, output_path=""):
     yolo.close_session()
 
 if __name__ == '__main__':
-    img = Image.open('/Users/gitwork/sp1_dev/python/yolo/dataset/JPEGImages/helmet30.jpg')
+    img = Image.open('/Users/i037762/ml/ml/yolo/dataset/JPEGImages/helmet10.jpg')
     obj=YOLO()
     result=obj.detect_image(img)
     result.show()
